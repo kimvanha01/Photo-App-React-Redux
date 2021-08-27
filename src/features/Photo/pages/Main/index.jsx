@@ -11,9 +11,10 @@ import './index.scss';
 MainPage.propTypes = {};
 
 function MainPage(props) {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const photos = useSelector(state => state.photos);
+
   const history = useHistory();
   console.log('List of photos: ', photos);
 
