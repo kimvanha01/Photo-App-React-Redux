@@ -6,8 +6,8 @@ import { removePhoto } from 'features/Photo/photoSlice';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { Container } from 'reactstrap';
-
+import { Button, Container } from 'reactstrap';
+import './index.scss';
 MainPage.propTypes = {};
 
 function MainPage(props) {
@@ -36,7 +36,7 @@ function MainPage(props) {
 
       <Container className="text-center">
         <div className="py-5">
-          <Link to="/photos/add">Add new photo</Link>
+        <Button className="addPhoto flex" color="success"><Link to="/photos/add">Add new photo</Link></Button>{' '}
         </div>
 
         <PhotoList
