@@ -12,7 +12,10 @@
 
 ### Random Image Control 
 Props
-    - name:
-    - imageUrl
-    - onImageUrlChange
-    - onRandomButtonBlur
+- name:
+- imageUrl
+- onImageUrlChange
+- onRandomButtonBlur
+
+### Watching web at :
+`http://mars99-photo-app.surge.sh/`
