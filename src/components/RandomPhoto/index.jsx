@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { Button } from 'reactstrap';
 import './RandomPhoto.scss';
 
@@ -49,7 +49,7 @@ function RandomPhoto(props) {
                         alt="Oops Not Found ... Please Click Button One more time!!! "
                         onError={handleRandomPhotoClick}
                     />}
-                <a href={imageUrl} target="_blank" >{imageUrl}</a>
+                <a href={imageUrl} target="_blank" rel="noreferrer" >{imageUrl}</a>
             </div>
         </div>
     );

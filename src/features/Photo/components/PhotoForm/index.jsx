@@ -1,12 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Select from 'react-select';
 import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
-import { Button, FormGroup, Input, Label, Spinner } from 'reactstrap';
-import { FastField, Form, Formik } from 'formik';
 import InputField from 'custom-fields/InputField';
-import SelectField from 'custom-fields/SelectField';
 import RandomPhotoField from 'custom-fields/RandomPhotoField';
+import SelectField from 'custom-fields/SelectField';
+import { FastField, Form, Formik } from 'formik';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Button, FormGroup } from 'reactstrap';
 import * as Yup from 'yup';
 import './index.scss';
 
