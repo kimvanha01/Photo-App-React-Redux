@@ -77,16 +77,28 @@
       "categoryId": 4,
       "photo": "https://picsum.photos/id/54/300/300",
       "id": 68399
+    },
+    {
+      "title": "Something Here",
+      "categoryId": 3,
+      "photo": "https://picsum.photos/id/559/300/300",
+      "id": 63652
+    },
+    {
+      "title": "Brigde",
+      "categoryId": 3,
+      "photo": "https://picsum.photos/id/965/300/300",
+      "id": 36492
     }
   ],
-  "users":[
+  "users": [
     {
-      "id":1,
+      "id": 1,
       "fullName": "Kim Van Ha",
-      "email":"kimvanha1999@gmail.com",
-      "password":"admin123@",
-      "isAdmin":true,
-      "token":"token123@test"
+      "email": "kimvanha1999@gmail.com",
+      "password": "admin123@",
+      "isAdmin": true,
+      "token": "token123@test"
     }
   ]
 }

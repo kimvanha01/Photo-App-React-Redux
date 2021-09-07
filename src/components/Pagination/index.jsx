@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'reactstrap';
+import './Pagination.scss';
 
 Pagination.propTypes = {
     pagination: PropTypes.object.isRequired,
@@ -25,15 +27,19 @@ function Pagination(props) {
     }
 
     return (
-        <div>
-            <button
+        <div className="pagination">
+            <Button
+                className="btn btn-prev"
+                color={"primary"}
                 disabled={_page <= 1}
                 onClick={() => handleChangePage(_page - 1)}>
-                Prev</button>
-            <button
-                disabled={_page >=   totalPage}
+                Prev</Button>
+            <Button
+                className="btn btn-next"
+                color={"primary"}
+                disabled={_page >= totalPage}
                 onClick={() => handleChangePage(_page + 1)}>
-                Next</button>
+                Next</Button>
         </div>
 
     );

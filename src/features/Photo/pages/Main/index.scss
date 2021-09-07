@@ -1,8 +1,13 @@
-.py-5{
-    display: flex;
+.photo-main {
+    margin-bottom: 3rem;
+}
+
+.py-5 {
+    display        : flex;
     justify-content: flex-end;
-    .addPhoto{
-        a{
+
+    .addPhoto {
+        a {
             color: #fff;
         }
     }
