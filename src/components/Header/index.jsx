@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Button, Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import './Header.scss';
 
 Header.propTypes = {

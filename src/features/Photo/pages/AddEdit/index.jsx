@@ -1,6 +1,6 @@
 import Banner from 'components/Banner';
 import PhotoForm from 'features/Photo/components/PhotoForm';
-import { addPhoto, updatePhoto } from 'features/Photo/photoSlice';
+import { addNewPhoto, updatedPhoto, updatePhoto } from 'features/Photo/photoSlice';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -10,7 +10,8 @@ AddEditPage.propTypes = {
 
 };
 
-function AddEditPage(props) {
+function AddEditPage() {
+
     const dispatch = useDispatch();
     const history = useHistory();
     const { photoId } = useParams();  // photoId tu Index routing // useParam trả về 1object, có bao nhiêu biến trên url thì trả về bấy nhiêu
@@ -19,9 +20,9 @@ function AddEditPage(props) {
     const isAddMode = !photoId; // trang này sẽ là Add photo nếu đường dẫn không có idphoto
 
     const editedPhoto = useSelector(state => {
-        return state.photos.find(x => x.id === +photoId) // chuyen photoId ve number
-
+        return state.photos.photos.find(x => x.id === + photoId) // chuyen photoId ve number
     }); // laasy trong redux cai list cua minh, tim thang nao co id === idPhoto param
+
     const initialValues = isAddMode // neeus la isAddmode thi se lay thang hien tai
         ? {
             title: '',
@@ -30,13 +31,10 @@ function AddEditPage(props) {
         }
         : editedPhoto;
     console.log({ photoId, editedPhoto });
-    const handleSubmit = (values) => {
-        // console.log('Form Submit: ', values)
-        // const action = addPhoto(values);
-        // console.log({action});
-        // dispatch(action);
+    // console.log('initialValues', initialValues);
 
-        // history.push('/photos');
+    const handleSubmit = (values) => {
+
         return new Promise(resolve => {
             console.log('Form submit: ', values);
 
@@ -47,12 +45,11 @@ function AddEditPage(props) {
                         ...values,
                         id: randomNumber(10000, 99999)
                     }
-                    const action = addPhoto(newPhoto);
-                    console.log({ action });
-                    dispatch(action);
+
+                    console.log(newPhoto);
+                    dispatch(addNewPhoto(newPhoto));
                 } else {
-                    const action = updatePhoto(values);
-                    dispatch(action);
+                    dispatch(updatedPhoto(values));
                 }
                 history.push('/photos');
                 resolve(true);

@@ -1,9 +1,9 @@
 import { unwrapResult } from '@reduxjs/toolkit';
-import productApi from 'api/productApi';
 import { getMe } from 'app/userSlice';
 import SignIn from 'features/Auth/pages/SignIn';
+import { getAllListPhoto } from 'features/Photo/photoSlice';
 import firebase from 'firebase';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.scss';
@@ -21,27 +21,8 @@ const config = {
 firebase.initializeApp(config);
 
 function App() {
-  const [productList, setProductList] = useState([]);
+
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchProductList = async () => {
-      try {
-        const params = {
-          _page: 1,
-          _limit: 10,
-
-        };
-        const response = await productApi.getAll(params);
-        console.log(response);
-        setProductList(response.data);
-      } catch (error) {
-        console.log('Failed to fetch product list: ', error);
-      }
-    }
-
-    fetchProductList();
-  }, []);
 
   // Handle firebase auth changed
   useEffect(() => {
@@ -57,8 +38,8 @@ function App() {
       try {
         const actionResult = await dispatch(getMe());
         const currentUser = unwrapResult(actionResult); // khi actionResult trả về có type, payload..., thì mình sẽ lấy cái curentUser
-        console.log(actionResult);
-        console.log('Logged in user: ', currentUser);
+        // console.log(actionResult);
+        console.log('Logged in user: ', currentUser.name);
       } catch (error) {
         console.log('Failed to login ', error.message);
         // show toast error

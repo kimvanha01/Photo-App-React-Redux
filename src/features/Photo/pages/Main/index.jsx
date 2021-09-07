@@ -1,22 +1,41 @@
 import Banner from 'components/Banner';
+import Pagination from 'components/Pagination';
 import Images from 'constants/images';
 import PhotoList from 'features/Photo/components/PhotoList';
-import { removePhoto } from 'features/Photo/photoSlice';
-
-import React from 'react';
+import { delPhoto, getAllListPhoto, removePhoto } from 'features/Photo/photoSlice';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import './index.scss';
+import queryString from 'query-string';
 MainPage.propTypes = {};
 
-function MainPage(props) {
+function MainPage() {
 
+  const photos = useSelector(state => state.photos.photos);
   const dispatch = useDispatch();
-  const photos = useSelector(state => state.photos);
-
   const history = useHistory();
+
   console.log('List of photos: ', photos);
+
+  const [pagination, setPagination] = useState({
+    _page: 1,
+    _limit: 8,
+    _totalRows: 13,
+  });
+
+  const [filters, setFilters] = useState({
+    _page: 1,
+    _limit: 8,
+    //...
+  })
+  console.log(filters)
+
+  useEffect(() => {
+    const params = queryString.stringify(filters);
+    dispatch(getAllListPhoto(params));
+  }, [dispatch])
 
   const handlePhotoEditClick = (photo) => {
     console.log('Edit: ', photo);
@@ -27,8 +46,21 @@ function MainPage(props) {
   const handlePhotoRemoveClick = (photo) => {
     console.log('Remove: ', photo);
     const removePhotoId = photo.id;
-    const action = removePhoto(removePhotoId);
-    dispatch(action);
+    dispatch(delPhoto(removePhotoId));
+  }
+
+  const handlePage = (newPage) => {
+    console.log("New Page", newPage);
+    // setFilters({
+    //   ...filters,
+    //   _page: newPage
+    // })
+    const params = queryString.stringify({
+      ...filters,
+      _page: newPage
+    });
+    dispatch(getAllListPhoto(params));
+
   }
 
   return (
@@ -37,13 +69,18 @@ function MainPage(props) {
 
       <Container className="text-center">
         <div className="py-5">
-        <Button className="addPhoto flex" color="success"><Link to="/photos/add">Add new photo</Link></Button>{' '}
+          <Button className="addPhoto flex" color="success"><Link to="/photos/add">Add new photo</Link></Button>{' '}
         </div>
 
         <PhotoList
           photoList={photos}
           onPhotoEditClick={handlePhotoEditClick}
           onPhotoRemoveClick={handlePhotoRemoveClick}
+        />
+        <Pagination
+          pagination={pagination}
+          onPageChange={handlePage}
+          setPagination={setPagination}
         />
       </Container>
     </div>

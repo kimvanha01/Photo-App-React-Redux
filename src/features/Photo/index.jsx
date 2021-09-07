@@ -9,18 +9,18 @@ import MainPage from './pages/Main';
 
 
 Photo.propTypes = {
-    
+
 };
 
-function Photo(props) {
+function Photo() {
     const match = useRouteMatch();
-    console.log({match});
+    console.log('Route:', { match });
 
     return (
         <Switch>
             <Route exact path={match.url} component={MainPage} />
 
-            <Route  path={`${match.url}/add`} component={AddEditPage} />
+            <Route path={`${match.url}/add`} component={AddEditPage} />
             <Route path={`${match.url}/:photoId`} component={AddEditPage} />
             <Route component={NotFound} />
         </Switch>

@@ -24,7 +24,7 @@ const getFirebaseToken = async () => {
 
       try {
         const token = await user.getIdToken();
-        console.log('[AXIOS] Logged in user token: ', token);
+        // console.log('[AXIOS] Logged in user token: ', token);
         resolve(token);
 
         unregisterAuthObserver();
@@ -38,7 +38,7 @@ const getFirebaseToken = async () => {
 }
 
 const axiosClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_BASE,
   headers: {
     'content-type': 'application/json',
   },
@@ -48,13 +48,6 @@ const axiosClient = axios.create({
 
 
 axiosClient.interceptors.request.use(async (config) => {
-  // Handle token here ...
-  // const currentUser = firebase.auth().currentUser;
-  // if(currentUser){
-  //   const token = await currentUser.getIdToken(); // refresh token howjp le
-  //   config.headers.Authorization = `Bearer ${token}`;
-  // }
-
   const token = await getFirebaseToken();
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

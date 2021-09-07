@@ -18,13 +18,9 @@ PhotoForm.defaultProps = {
 }
 
 function PhotoForm(props) {
-    // const initialValues = {
-    //     title: '',   // không bao giờ sài undefind vì nếu chọn control sẽ thành uncontrol
-    //     // name:'' // thêm trường name
-    //     categoryId: null,
-    //     photo: ''
-    // }
+
     const { initialValues, isAddMode } = props; // nhan initialValues tu thang cha
+
     // Định nghĩa 1 schema để validate object initialValues bằng Yup ( Formik đã tích hợp sẵn hàm isValid của Yup)
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('This field is required.'),
@@ -32,11 +28,7 @@ function PhotoForm(props) {
         categoryId: Yup.number().required('This field is required.').nullable(), //cho phép giá trị bị set null báo lỗi
 
         photo: Yup.string().required('This field is required.'),
-        // photo: Yup.string().when('categoryId', {
-        //     is: 1,
-        //     then: Yup.string().required('This field is required.'),
-        //     otherwise: Yup.string().notRequired(),
-        //   })
+
     })
 
     return (
@@ -48,8 +40,7 @@ function PhotoForm(props) {
 
             {formikProps => {
                 const { values, errors, touched, isSubmitting } = formikProps;
-                console.log({ values, errors, touched });
-
+                console.log('attributes of formik:', { values, errors, touched });
 
                 return (
                     <Form>
@@ -63,18 +54,9 @@ function PhotoForm(props) {
                             label="Title"
                             placeholder="Eg: Wow nature..."
                         />
-                        {/* <FastField   //Control Name
-                            //props cua Fastfield
-                            name="name" 
-                            component={InputField} 
-
-                            //nhung thu ta truyen vao InputField
-                            label="name"
-                            placeholder="Eg: Wow nature..."
-                        /> */}
-                        {/* <FormGroup>   === Fastfield ở trên
-                            <Label for="titleId">Title</Label>
-                            <Input name="title" id="titleId" placeholder="Eg: Wow nature..." />
+                        {/* <FormGroup>
+                            <Label for="titleId"></Label>
+                            <Input name="title" value={initialValues.title} id="titleId" placeholder="Eg: Wow nature..." />
                         </FormGroup> */}
 
                         <FastField
@@ -101,7 +83,7 @@ function PhotoForm(props) {
                         />
                         <FormGroup>
                             <Button className="add-to-album" type="submit" color={isAddMode ? "primary" : "success"} >
-                                {isSubmitting && <div class="loader"></div>}
+                                {isSubmitting && <div className="loader"></div>}
                                 {isAddMode ? 'Add to Album' : 'Update your Photo '}</Button>
                         </FormGroup>
                     </Form>
